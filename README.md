@@ -25,6 +25,83 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## API documentation (Swagger)
+
+Once the project is running, interactive documentation is available at:
+
+`/ms-gesintel/swagger-ui/index.html`
+
+Local example:
+
+`http://localhost:3000/ms-gesintel/swagger-ui/index.html`
+
+Includes:
+
+- General project endpoints.
+- `party-screening` module endpoints.
+- OFAC and PEP request/response schemas.
+- DTO validation rules reflected in OpenAPI.
+
+## Main endpoints
+
+- `POST /ms-gesintel/party-screening/ofac` - Screening OFAC.
+- `POST /ms-gesintel/party-screening/pep` - Screening PEP.
+
+## Usage examples
+
+### POST /ms-gesintel/party-screening/ofac
+
+Request:
+
+```json
+{
+  "rut": "11111111-1",
+  "names": "Juan Carlos",
+  "firstLastName": "Bodoque",
+  "secondLastName": "Triviño",
+  "birthDate": "1996-06-22"
+}
+```
+
+Response 200:
+
+```json
+{
+  "isOfac": false
+}
+```
+
+### POST /ms-gesintel/party-screening/pep
+
+Request:
+
+```json
+{
+  "rut": "11111111-1"
+}
+```
+
+Response 200:
+
+```json
+{
+  "isPep": false
+}
+```
+
+### Validation 400 error example
+
+```json
+{
+  "message": [
+    "rut must contain only digits, k, or hyphen",
+    "birthDate must be in the format yyyy-MM-dd"
+  ],
+  "error": "Bad Request",
+  "statusCode": 400
+}
+```
+
 ## Project setup
 
 ```bash

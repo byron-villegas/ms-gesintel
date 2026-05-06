@@ -1,10 +1,13 @@
 {
   "name": "ms-gesintel",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "version": "1.0.0",
+  "description": "GesIntel Microservice API",
+  "author": {
+    "name": "Byron Villegas Moya",
+    "email": "byronvillegasm@gmail.com"
+  },
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -21,10 +24,15 @@
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
+    "@nestjs/config": "^4.0.4",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/swagger": "^11.4.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",

@@ -1,10 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
-import request from 'supertest';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { App } from 'supertest/types';
 import { AppModule } from './../src/app.module';
 
-describe('AppController (e2e)', () => {
+describe('App API (e2e)', () => {
   let app: INestApplication<App>;
 
   beforeEach(async () => {
@@ -13,14 +12,20 @@ describe('AppController (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.setGlobalPrefix('ms-gesintel');
+    app.useGlobalPipes(
+      new ValidationPipe({
+        whitelist: true,
+        forbidNonWhitelisted: true,
+        transform: true,
+      }),
+    );
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  it('should bootstrap the application', () => {
+    expect(app).toBeDefined();
+    expect(app.getHttpServer()).toBeDefined();
   });
 
   afterEach(async () => {

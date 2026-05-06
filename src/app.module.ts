@@ -1,10 +1,17 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import { partyScreeningConfig } from './config/party-screening.config';
+import { PartyScreeningModule } from './compliance/party-screening/party-screening.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({
+      load: [partyScreeningConfig],
+      isGlobal: true,
+    }),
+    PartyScreeningModule,
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
