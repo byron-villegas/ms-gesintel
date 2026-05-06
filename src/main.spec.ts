@@ -84,7 +84,7 @@ describe('main bootstrap', () => {
     expect(mockApp.useGlobalPipes).toHaveBeenCalledTimes(1);
     expect(createDocumentMock).toHaveBeenCalledTimes(1);
     expect(setupMock).toHaveBeenCalledWith(
-      'swagger-ui/index.html',
+      'swagger-ui',
       mockApp,
       expect.any(Object),
       expect.objectContaining({

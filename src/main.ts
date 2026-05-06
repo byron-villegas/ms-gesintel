@@ -23,12 +23,12 @@ async function bootstrap() {
     .setContact('Byron Villegas Moya', 'https://github.com/byron-villegas/ms-gesintel', 'byronvillegasm@gmail.com')
     .setLicense('MIT', 'https://github.com/byron-villegas/ms-gesintel/blob/main/LICENSE')
     .addServer('http://localhost:3000', 'Local Development Server')
-    .addTag('Health', 'Service health endpoints')
+    .addServer('https://ms-gesintel.vercel.app', 'Vercel Production')
     .addTag('Party Screening', 'Endpoints for OFAC and PEP validations')
     .build();
 
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('swagger-ui/index.html', app, swaggerDocument, {
+  SwaggerModule.setup('swagger-ui', app, swaggerDocument, {
     useGlobalPrefix: true,
     swaggerOptions: {
       persistAuthorization: true,
