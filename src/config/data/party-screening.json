@@ -1,0 +1,44 @@
+{
+    "ofac": [
+        {
+            "rut": "1119887-2",
+            "names": "Armando",
+            "firstLastName": "Fernandez",
+            "secondLastName": "Larios",
+            "birthDate": "1949-07-13"
+        },
+        {
+            "rut": "1261294-K",
+            "names": "Juan Carlos",
+            "firstLastName": "Muñoz",
+            "secondLastName": "Abogabir",
+            "birthDate": "1970-06-22"
+        }
+    ],
+    "pep": [
+        {
+            "rut": "1378923-1",
+            "names": "Jose Antonio",
+            "firstLastName": "Kast",
+            "secondLastName": "Rist",
+            "birthDate": "1966-01-18",
+            "charge": "President"
+        },
+        {
+            "rut": "1734527-3",
+            "names": "Gabriel",
+            "firstLastName": "Boric",
+            "secondLastName": "Font",
+            "birthDate": "1986-02-11",
+            "charge": "Ex-President"
+        },
+        {
+            "rut": "1216225-1",
+            "names": "Miguel Juan Sebastian",
+            "firstLastName": "Piñera",
+            "secondLastName": "Echenique",
+            "birthDate": "1941-12-01",
+            "charge": "Ex-President"
+        }
+    ]
+}
