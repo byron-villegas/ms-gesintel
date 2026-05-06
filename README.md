@@ -29,11 +29,11 @@
 
 Once the project is running, interactive documentation is available at:
 
-`/ms-gesintel/swagger-ui/index.html`
+`/api/swagger-ui/index.html`
 
 Local example:
 
-`http://localhost:3000/ms-gesintel/swagger-ui/index.html`
+`http://localhost:3000/api/swagger-ui/index.html`
 
 Includes:
 
@@ -44,12 +44,12 @@ Includes:
 
 ## Main endpoints
 
-- `POST /ms-gesintel/party-screening/ofac` - Screening OFAC.
-- `POST /ms-gesintel/party-screening/pep` - Screening PEP.
+- `POST /api/party-screening/ofac` - Screening OFAC.
+- `POST /api/party-screening/pep` - Screening PEP.
 
 ## Usage examples
 
-### POST /ms-gesintel/party-screening/ofac
+### POST /api/party-screening/ofac
 
 Request:
 
@@ -71,7 +71,7 @@ Response 200:
 }
 ```
 
-### POST /ms-gesintel/party-screening/pep
+### POST /api/party-screening/pep
 
 Request:
 

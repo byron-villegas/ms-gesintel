@@ -13,7 +13,7 @@ describe('Party screening API (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.setGlobalPrefix('ms-gesintel');
+    app.setGlobalPrefix('api');
     app.useGlobalPipes(
       new ValidationPipe({
         whitelist: true,
@@ -24,9 +24,9 @@ describe('Party screening API (e2e)', () => {
     await app.init();
   });
 
-  it('/ms-gesintel/party-screening/ofac (POST) should return 200 with isOfac=false for unknown rut', () => {
+  it('/api/party-screening/ofac (POST) should return 200 with isOfac=false for unknown rut', () => {
     return request(app.getHttpServer())
-      .post('/ms-gesintel/party-screening/ofac')
+      .post('/api/party-screening/ofac')
       .send({
         rut: '11111111-1',
         names: 'Juan Carlos',
@@ -38,9 +38,9 @@ describe('Party screening API (e2e)', () => {
       .expect({ isOfac: false });
   });
 
-  it('/ms-gesintel/party-screening/ofac (POST) should return 200 with isOfac=true for listed rut', () => {
+  it('/api/party-screening/ofac (POST) should return 200 with isOfac=true for listed rut', () => {
     return request(app.getHttpServer())
-      .post('/ms-gesintel/party-screening/ofac')
+      .post('/api/party-screening/ofac')
       .send({
         rut: '1119887-2',
         names: 'Armando',
@@ -52,9 +52,9 @@ describe('Party screening API (e2e)', () => {
       .expect({ isOfac: true });
   });
 
-  it('/ms-gesintel/party-screening/ofac (POST) should return 200 with isOfac=true when names and birthDate match but rut differs', () => {
+  it('/api/party-screening/ofac (POST) should return 200 with isOfac=true when names and birthDate match but rut differs', () => {
     return request(app.getHttpServer())
-      .post('/ms-gesintel/party-screening/ofac')
+      .post('/api/party-screening/ofac')
       .send({
         rut: '99999999-9',
         names: 'Armando',
@@ -66,9 +66,9 @@ describe('Party screening API (e2e)', () => {
       .expect({ isOfac: true });
   });
 
-  it('/ms-gesintel/party-screening/ofac (POST) should return 400 for invalid payload', async () => {
+  it('/api/party-screening/ofac (POST) should return 400 for invalid payload', async () => {
     const response = await request(app.getHttpServer())
-      .post('/ms-gesintel/party-screening/ofac')
+      .post('/api/party-screening/ofac')
       .send({
         rut: 'abc',
         names: '',
@@ -88,9 +88,9 @@ describe('Party screening API (e2e)', () => {
     );
   });
 
-  it('/ms-gesintel/party-screening/pep (POST) should return 200 with isPep=false for unknown rut', () => {
+  it('/api/party-screening/pep (POST) should return 200 with isPep=false for unknown rut', () => {
     return request(app.getHttpServer())
-      .post('/ms-gesintel/party-screening/pep')
+      .post('/api/party-screening/pep')
       .send({
         rut: '99999999-9',
       })
@@ -98,9 +98,9 @@ describe('Party screening API (e2e)', () => {
       .expect({ isPep: false });
   });
 
-  it('/ms-gesintel/party-screening/pep (POST) should return 200 with isPep=true for listed rut', () => {
+  it('/api/party-screening/pep (POST) should return 200 with isPep=true for listed rut', () => {
     return request(app.getHttpServer())
-      .post('/ms-gesintel/party-screening/pep')
+      .post('/api/party-screening/pep')
       .send({
         rut: '1378923-1',
       })
@@ -108,9 +108,9 @@ describe('Party screening API (e2e)', () => {
       .expect({ isPep: true });
   });
 
-  it('/ms-gesintel/party-screening/pep (POST) should return 400 for invalid payload', async () => {
+  it('/api/party-screening/pep (POST) should return 400 for invalid payload', async () => {
     const response = await request(app.getHttpServer())
-      .post('/ms-gesintel/party-screening/pep')
+      .post('/api/party-screening/pep')
       .send({
         rut: 'abc',
       })

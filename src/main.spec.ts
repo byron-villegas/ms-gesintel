@@ -80,7 +80,7 @@ describe('main bootstrap', () => {
     await new Promise<void>((resolve) => setImmediate(resolve));
 
     expect(createMock).toHaveBeenCalledTimes(1);
-    expect(mockApp.setGlobalPrefix).toHaveBeenCalledWith('ms-gesintel');
+    expect(mockApp.setGlobalPrefix).toHaveBeenCalledWith('api');
     expect(mockApp.useGlobalPipes).toHaveBeenCalledTimes(1);
     expect(createDocumentMock).toHaveBeenCalledTimes(1);
     expect(setupMock).toHaveBeenCalledWith(
