@@ -8,9 +8,12 @@ describe('main bootstrap', () => {
   });
 
   it('should configure swagger and start app using PORT env var', async () => {
+    const mockLogger = { log: jest.fn() };
     const mockApp = {
       setGlobalPrefix: jest.fn(),
       useGlobalPipes: jest.fn(),
+      useLogger: jest.fn(),
+      get: jest.fn().mockReturnValue(mockLogger),
       listen: jest.fn().mockResolvedValue(undefined),
     };
 
@@ -80,6 +83,11 @@ describe('main bootstrap', () => {
     await new Promise<void>((resolve) => setImmediate(resolve));
 
     expect(createMock).toHaveBeenCalledTimes(1);
+    expect(createMock).toHaveBeenCalledWith(expect.any(Function), {
+      bufferLogs: true,
+    });
+    expect(mockApp.get).toHaveBeenCalledTimes(1);
+    expect(mockApp.useLogger).toHaveBeenCalledWith(mockLogger);
     expect(mockApp.setGlobalPrefix).toHaveBeenCalledWith('api');
     expect(mockApp.useGlobalPipes).toHaveBeenCalledTimes(1);
     expect(createDocumentMock).toHaveBeenCalledTimes(1);
@@ -95,9 +103,12 @@ describe('main bootstrap', () => {
   });
 
   it('should use port 3000 when PORT is undefined', async () => {
+    const mockLogger = { log: jest.fn() };
     const mockApp = {
       setGlobalPrefix: jest.fn(),
       useGlobalPipes: jest.fn(),
+      useLogger: jest.fn(),
+      get: jest.fn().mockReturnValue(mockLogger),
       listen: jest.fn().mockResolvedValue(undefined),
     };
 
@@ -160,6 +171,7 @@ describe('main bootstrap', () => {
     });
     await new Promise<void>((resolve) => setImmediate(resolve));
 
+    expect(mockApp.useLogger).toHaveBeenCalledWith(mockLogger);
     expect(mockApp.listen).toHaveBeenCalledWith(3000);
   });
 });
