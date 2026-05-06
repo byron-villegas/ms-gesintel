@@ -1,8 +1,9 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { SwaggerModule } from '@nestjs/swagger';
 import { Logger } from 'nestjs-pino';
 import { AppModule } from './app.module';
+import { buildSwaggerConfig } from './config/swagger.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -19,18 +20,7 @@ async function bootstrap() {
     }),
   );
 
-  const swaggerConfig = new DocumentBuilder()
-    .setTitle('MS Gesintel API')
-    .setDescription(
-      'Gesintel Microservice API for party screening and health checks',
-    )
-    .setVersion('1.0.0')
-    .setContact('Byron Villegas Moya', 'https://github.com/byron-villegas/ms-gesintel', 'byronvillegasm@gmail.com')
-    .setLicense('MIT', 'https://github.com/byron-villegas/ms-gesintel/blob/main/LICENSE')
-    .addServer('http://localhost:3000', 'Local Development Server')
-    .addServer('https://ms-gesintel.vercel.app', 'Vercel Production')
-    .addTag('Party Screening', 'Endpoints for OFAC and PEP validations')
-    .build();
+  const swaggerConfig = buildSwaggerConfig();
 
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('swagger-ui', app, swaggerDocument, {

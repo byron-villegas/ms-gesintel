@@ -22,40 +22,9 @@ describe('main bootstrap', () => {
       openapi: '3.0.0',
     });
     const setupMock = jest.fn();
-
-    class MockDocumentBuilder {
-      setTitle(): this {
-        return this;
-      }
-
-      setDescription(): this {
-        return this;
-      }
-
-      setVersion(): this {
-        return this;
-      }
-
-      setContact(): this {
-        return this;
-      }
-
-      setLicense(): this {
-        return this;
-      }
-
-      addServer(): this {
-        return this;
-      }
-
-      addTag(): this {
-        return this;
-      }
-
-      build(): Record<string, never> {
-        return {};
-      }
-    }
+    const buildSwaggerConfigMock = jest.fn().mockReturnValue({
+      openapi: '3.0.0',
+    });
 
     process.env.PORT = '4321';
 
@@ -70,11 +39,14 @@ describe('main bootstrap', () => {
     }));
 
     jest.doMock('@nestjs/swagger', () => ({
-      DocumentBuilder: MockDocumentBuilder,
       SwaggerModule: {
         createDocument: createDocumentMock,
         setup: setupMock,
       },
+    }));
+
+    jest.doMock('./config/swagger.config', () => ({
+      buildSwaggerConfig: buildSwaggerConfigMock,
     }));
 
     jest.isolateModules(() => {
@@ -90,6 +62,7 @@ describe('main bootstrap', () => {
     expect(mockApp.useLogger).toHaveBeenCalledWith(mockLogger);
     expect(mockApp.setGlobalPrefix).toHaveBeenCalledWith('api');
     expect(mockApp.useGlobalPipes).toHaveBeenCalledTimes(1);
+    expect(buildSwaggerConfigMock).toHaveBeenCalledTimes(1);
     expect(createDocumentMock).toHaveBeenCalledTimes(1);
     expect(setupMock).toHaveBeenCalledWith(
       'swagger-ui',
@@ -112,39 +85,9 @@ describe('main bootstrap', () => {
       listen: jest.fn().mockResolvedValue(undefined),
     };
 
-    class MockDocumentBuilder {
-      setTitle(): this {
-        return this;
-      }
-
-      setDescription(): this {
-        return this;
-      }
-
-      setVersion(): this {
-        return this;
-      }
-
-      setContact(): this {
-        return this;
-      }
-
-      setLicense(): this {
-        return this;
-      }
-
-      addServer(): this {
-        return this;
-      }
-
-      addTag(): this {
-        return this;
-      }
-
-      build(): Record<string, never> {
-        return {};
-      }
-    }
+    const buildSwaggerConfigMock = jest.fn().mockReturnValue({
+      openapi: '3.0.0',
+    });
 
     delete process.env.PORT;
 
@@ -159,11 +102,14 @@ describe('main bootstrap', () => {
     }));
 
     jest.doMock('@nestjs/swagger', () => ({
-      DocumentBuilder: MockDocumentBuilder,
       SwaggerModule: {
         createDocument: jest.fn().mockReturnValue({ openapi: '3.0.0' }),
         setup: jest.fn(),
       },
+    }));
+
+    jest.doMock('./config/swagger.config', () => ({
+      buildSwaggerConfig: buildSwaggerConfigMock,
     }));
 
     jest.isolateModules(() => {
@@ -172,6 +118,7 @@ describe('main bootstrap', () => {
     await new Promise<void>((resolve) => setImmediate(resolve));
 
     expect(mockApp.useLogger).toHaveBeenCalledWith(mockLogger);
+    expect(buildSwaggerConfigMock).toHaveBeenCalledTimes(1);
     expect(mockApp.listen).toHaveBeenCalledWith(3000);
   });
 });
