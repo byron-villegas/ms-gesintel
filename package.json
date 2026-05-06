@@ -1,7 +1,7 @@
 {
   "name": "ms-gesintel",
   "version": "1.0.0",
-  "description": "GesIntel Microservice API",
+  "description": "Gesintel Microservice API",
   "author": {
     "name": "Byron Villegas Moya",
     "email": "byronvillegasm@gmail.com"

@@ -22,7 +22,7 @@ async function bootstrap() {
   const swaggerConfig = new DocumentBuilder()
     .setTitle('MS Gesintel API')
     .setDescription(
-      'GesIntel Microservice API for party screening and health checks',
+      'Gesintel Microservice API for party screening and health checks',
     )
     .setVersion('1.0.0')
     .setContact('Byron Villegas Moya', 'https://github.com/byron-villegas/ms-gesintel', 'byronvillegasm@gmail.com')
