@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ConfigType } from '@nestjs/config';
+import { type ConfigType } from '@nestjs/config';
 import { partyScreeningConfig } from '../../config/party-screening.config';
 import { OfacRequestDto } from './dto/ofac-request.dto';
 import { OfacResponseDto } from './dto/ofac-response.dto';
