@@ -11,7 +11,6 @@ async function bootstrap() {
   });
   app.useLogger(app.get(Logger));
 
-  app.setGlobalPrefix('api');
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -23,8 +22,12 @@ async function bootstrap() {
   const swaggerConfig = buildSwaggerConfig();
 
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('swagger-ui', app, swaggerDocument, {
-    useGlobalPrefix: true,
+  SwaggerModule.setup('api/swagger-ui', app, swaggerDocument, {
+    customCssUrl: 'https://unpkg.com/swagger-ui-dist@5.32.4/swagger-ui.css',
+    customJs: [
+      'https://unpkg.com/swagger-ui-dist@5.32.4/swagger-ui-bundle.js',
+      'https://unpkg.com/swagger-ui-dist@5.32.4/swagger-ui-standalone-preset.js',
+    ],
     swaggerOptions: {
       persistAuthorization: true,
     },

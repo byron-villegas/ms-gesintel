@@ -10,7 +10,6 @@ describe('main bootstrap', () => {
   it('should configure swagger and start app using PORT env var', async () => {
     const mockLogger = { log: jest.fn() };
     const mockApp = {
-      setGlobalPrefix: jest.fn(),
       useGlobalPipes: jest.fn(),
       useLogger: jest.fn(),
       get: jest.fn().mockReturnValue(mockLogger),
@@ -60,16 +59,22 @@ describe('main bootstrap', () => {
     });
     expect(mockApp.get).toHaveBeenCalledTimes(1);
     expect(mockApp.useLogger).toHaveBeenCalledWith(mockLogger);
-    expect(mockApp.setGlobalPrefix).toHaveBeenCalledWith('api');
     expect(mockApp.useGlobalPipes).toHaveBeenCalledTimes(1);
     expect(buildSwaggerConfigMock).toHaveBeenCalledTimes(1);
     expect(createDocumentMock).toHaveBeenCalledTimes(1);
     expect(setupMock).toHaveBeenCalledWith(
-      'swagger-ui',
+      'api/swagger-ui',
       mockApp,
       expect.any(Object),
       expect.objectContaining({
-        useGlobalPrefix: true,
+        customCssUrl: 'https://unpkg.com/swagger-ui-dist@5.32.4/swagger-ui.css',
+        customJs: [
+          'https://unpkg.com/swagger-ui-dist@5.32.4/swagger-ui-bundle.js',
+          'https://unpkg.com/swagger-ui-dist@5.32.4/swagger-ui-standalone-preset.js',
+        ],
+        swaggerOptions: {
+          persistAuthorization: true,
+        },
       }),
     );
     expect(mockApp.listen).toHaveBeenCalledWith('4321');
@@ -78,7 +83,6 @@ describe('main bootstrap', () => {
   it('should use port 3000 when PORT is undefined', async () => {
     const mockLogger = { log: jest.fn() };
     const mockApp = {
-      setGlobalPrefix: jest.fn(),
       useGlobalPipes: jest.fn(),
       useLogger: jest.fn(),
       get: jest.fn().mockReturnValue(mockLogger),

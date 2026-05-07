@@ -29,7 +29,7 @@ const VALIDATION_BAD_REQUEST_SCHEMA = {
 };
 
 @ApiTags('Party Screening')
-@Controller('party-screening')
+@Controller('api/party-screening')
 export class PartyScreeningController {
   constructor(private readonly partyScreeningService: PartyScreeningService) {}
 
